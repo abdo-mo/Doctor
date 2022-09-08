@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="text-center logo my-4">
+      Log In
+    </h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <form method="post" novalidate>
+              {% csrf_token %}
+              <input type="hidden" name = "next" value = "{{next}}">
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+              <small class = 'text-muted ml-2'>
+                <a href="{% url 'password_reset' %}">Forget Password ?</a>
+            </small>
+            </form>
+          </div>
+          <div class="card-footer text-muted text-center">
+            Create new account <a href="{% url 'signup' %}">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}  
