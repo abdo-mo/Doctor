@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from .forms import *
-from .models import User, PatientMore
+from .models import User, Patients
 
 # Create your views here.
 
 def signup(request):
-    form = PatientSignUpForm()
+    form = PatientForm()
     print('test')
     if request.method == "POST":
-        form = PatientSignUpForm(request.POST)
+        form = PatientForm(request.POST)
         print('test again')
         if form.is_valid():
+            
             print('test adding user')
             patient = form.save()
-            patientMore = PatientMore.objects.create(
+            patients = Patients.objects.create(
                 gender = form.cleaned_data.get('gender'),
                 job = form.cleaned_data.get('job'),
                 user = patient
