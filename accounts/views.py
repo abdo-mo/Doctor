@@ -6,25 +6,25 @@ from .models import User, Patients
 # Create your views here.
 
 def signup(request):
-    form = PatientForm()
-    print('test')
+    user_form = SignUpForm()
+    patient_form = PatientForm()
     if request.method == "POST":
-        form = PatientForm(request.POST)
-        print('test again')
-        if form.is_valid():
-            
-            print('test adding user')
-            patient = form.save()
-            patients = Patients.objects.create(
-                gender = form.cleaned_data.get('gender'),
-                job = form.cleaned_data.get('job'),
-                user = patient
-            )
-            print('done', form)
+        user_form = SignUpForm(request.POST)
+        patient_form = PatientForm(request.POST)
+        if user_form.is_valid() and patient_form.is_valid():            
+            user = user_form.save(commit=False)
+            user.is_doctor = False
+            user.is_patient = True
+            user = user_form.save()
+            patient = patient_form.save(commit=False)
+            patient.user = user
+            patient.gender = patient_form.cleaned_data.get('gender')
+            patient.job = patient_form.cleaned_data.get('job')
+            patient.save()
             return redirect('home')
         else:
             print('it is validation error')
-    return render(request, 'signup.html', {'form':form})
+    return render(request, 'signup.html', {'user_form':user_form, 'patient_form': patient_form})
 
 # class patientSignUpView(CreateView):
 #     model = User

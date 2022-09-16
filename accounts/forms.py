@@ -3,29 +3,8 @@ from django import forms
 # from django.contrib.auth.models import User
 from .models import Patients, User
 
-# class PatientSignUpForm(UserCreationForm):
-#     password1 = forms.CharField(
-#         label="Password",
-#         widget=forms.PasswordInput(attrs={'class':'form-control'}),
-#     )
-#     password2 = forms.CharField(
-#         label="Confirm password",
-#         widget=forms.PasswordInput(attrs={'class':'form-control'}),
-#     )
-    
-#     class Meta:
-#         widgets = {
-#             'user': forms.TextInput(attrs={'class': 'form-control'}),
-#             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-#          }
-#         model = Patients
-#         fields = ('user', 'password1', 'password2', 'gender', 'job')
-
-class PatientForm(forms.ModelForm):
-    username = forms.CharField(
-        label="User Name",
-        widget=forms.TextInput(attrs={'class':'form-control'}),
-    )
+class SignUpForm(forms.ModelForm):
+    email = forms.CharField(max_length=255, required = True, widget = forms.EmailInput())
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={'class':'form-control'}),
@@ -36,14 +15,13 @@ class PatientForm(forms.ModelForm):
     )
     
     class Meta:
-        model = Patients
-        fields = ('username', 'email', 'password1', 'password2', 'gender', 'job')
-        GENDER_CHOICES = [('Male', 'Male'), ('Female', 'Female')]
-        widgets = {
-                    'gender': forms.Select(choices=GENDER_CHOICES,attrs={'class': 'form-control'}),
-                }
-    email = forms.CharField(max_length=255, required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+        model = User
+        fields = ('username', 'password1', 'password2', 'email')
 
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = Patients
+        fields = ('gender', 'job')
 
 
 # class UserUpdateForm(forms.ModelForm):
