@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}
+<link href="{% static 'css/minStyle.css' %}" rel='stylesheet'>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid bg-primary py-3">
+    <div class="container">
+        <div class='p-4'>
+            <h5 class="text-light title">Appiontments.</h5> <a class="text-white addNew" href="#">Add new</a>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">User name</th>
+                <th scope="col">Request</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

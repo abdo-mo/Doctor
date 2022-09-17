@@ -1,0 +1,30 @@
+/* the base template */
+body {
+    background-color:#aaa;
+  }
+  
+  .logo {
+    font-family: 'Peralta', cursive;
+  }
+  
+  .logo a {
+    color: rgba(0,0,0,.9);
+  }
+  
+  .logo a:hover,
+  .logo a:active {
+    text-decoration: none;
+  }
+  /* the appointments list page */
+  .addNew {
+    background-color: #46C6CE;
+    padding: 5px;
+    color:white;
+    border-radius: 5px;
+  }
+.title {
+  display: inline;
+  margin-right: 10px;
+  font-weight: normal;
+  font-size: 2.5erm;
+}
