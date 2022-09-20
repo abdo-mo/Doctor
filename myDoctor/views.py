@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .forms import AppointmentForm
+from .forms import AppointmentForm, AppointmentUpdateForm, AppointmentRescheduleForm
 from .models import Appointment
 
 # Create your views here.
@@ -32,3 +32,23 @@ def newAppointment(request):
 def appointmentsList(request):
     appointments = Appointment.objects.all()
     return render(request, 'appointments.html', {'appointments': appointments})
+
+def appointmentUpdate(request, id):
+    context = {}
+    obj = get_object_or_404(Appointment, id=id)
+    form = AppointmentUpdateForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('appointmentsList')
+    context['form'] = form
+    return render(request, 'appointmentUpdate.html', context)
+
+def appointmentReschedule(request, id):
+    context = {}
+    obj = get_object_or_404(Appointment, id=id)
+    form = AppointmentRescheduleForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect('home')
+    context["form"] = form
+    return render(request, 'appointmentReschedule.html', context)
