@@ -7,4 +7,6 @@ urlpatterns = [
     path('appointment/list/', views.appointmentsList, name='appointmentsList'),
     path('appointment/<int:id>/update', views.appointmentUpdate, name='appointmentUpdate'),
     path('appointment/<int:id>/reschedule', views.appointmentReschedule, name='appointmentReschedule'),
+    path('appointment/<int:id>/delete', views.delete, name="delete"),
+    path('appointment/<int:id>/conformDelete', views.conformDelete, name='conformDelete'),
 ]

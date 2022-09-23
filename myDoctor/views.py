@@ -17,13 +17,9 @@ def newAppointment(request):
         form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment = form.save(commit=False)
-            user = request.user
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.save()
-            appointment.patient = user
+            appointment.patient = request.user
             appointment.save()
-        return redirect('home')
+        return redirect('appointmentsList')
     else:
         form = AppointmentForm()
     context['form'] = form
@@ -52,3 +48,13 @@ def appointmentReschedule(request, id):
         return redirect('home')
     context["form"] = form
     return render(request, 'appointmentReschedule.html', context)
+
+def conformDelete(request, id):
+    context = {}
+    obj = get_object_or_404(Appointment, id=id)
+    context['obj'] = obj
+    return render(request, 'conformDelete.html', context)
+def delete(request, id):
+    obj = get_object_or_404(Appointment, id=id)
+    obj.delete()
+    return redirect('appointmentsList')

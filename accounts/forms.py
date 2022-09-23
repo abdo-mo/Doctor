@@ -13,10 +13,16 @@ class SignUpForm(forms.ModelForm):
         label="Confirm password",
         widget=forms.PasswordInput(attrs={'class':'form-control'}),
     )
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class':'form-control'}),
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class':'form-control'}),
+    )
     
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'email')
+        fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name')
 
 class PatientForm(forms.ModelForm):
     class Meta:
