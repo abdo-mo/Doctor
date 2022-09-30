@@ -23,6 +23,7 @@
     <!-- <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/minStyle.css' %}" rel='stylesheet'>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block stylesheet %}
     {% endblock %}
@@ -51,15 +52,22 @@
                     </div>
                     <div class="col-md-6 text-right text-lg-right mb-2 mb-lg-0">
                         <div class="d-inline-flex align-items-center">
-                            <a class="text-white px-3" href="{% url 'signup'%}">Signup</a>
-                            <span class="text-white">|</span>
-                            <a class="text-white px-3" href="{% url 'login'%}">Login</a>
+                            {% if user is authenticated %}
                             <span class="text-white">|</span>
                             <a class="text-white px-3" href="">Help</a>
                             <span class="text-white">|</span>
                             <a class="text-white pl-3" href="">Support</a>
                             <span class="text-white">|</span>
-                            <a class="text-white pl-3" href="{% url 'logout' %}">Logout</a>
+                            <a class="text-white px-3" href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                            <a class="text-white px-3" href="">Help</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white px-3" href="">Support</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white px-3" href="{% url 'signup'%}">Signup</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white px-3" href="{% url 'login'%}">Login</a>
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -81,7 +89,17 @@
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="{% url 'appointmentsList' %}" class="nav-item nav-link">Appointments</a>
+                        <div class="dropdown nav-item nav-link">
+                            <button class="dropbtn">Appointments 
+                              <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                              <a href="{% url 'appointmentsList' %}" class="nav-item nav-link">All Appointments</a>
+                              <a href="#" class="nav-item nav-link">Up comming Appointments</a>
+                              <a href="#" class="nav-item nav-link">Past Appointments</a>
+                              <a href="#" class="nav-item nav-link">Reschedule Request</a>
+                            </div>
+                        </div> 
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="pricing.html" class="nav-item nav-link">Pricing</a>
