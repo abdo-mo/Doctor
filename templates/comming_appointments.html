@@ -8,7 +8,7 @@
 <div class="container-fluid bg-primary py-3">
     <div class="container">
         <div class='p-4'>
-            <h5 class="text-light title">Appiontments.</h5> <a class="text-white addNew" href="{% url 'newAppointment' %}">Add new</a>
+            <h5 class="text-light title">Up Comming Appiontments.</h5> <a class="text-white addNew" href="{% url 'newAppointment' %}">Add new</a>
         </div>
         <table class="table">
             <thead class="thead-light">
@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for appointment in appointments %}
+              {% for appointment in comming_appointments %}
               <tr class="text-white">
                 <th scope="row" style="width: 15%">{{appointment.patient.first_name}}</th>
                 <td>{{appointment.request}}</td>
